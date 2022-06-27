@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 // var func = require('./compiler/helpers');
-const sass = require('gulp-sass');
+const sass = require('gulp-sass')(require('sass'));
 const sourcemaps = require('gulp-sourcemaps');
 const postcss = require("gulp-postcss");
 const purgecss = require('gulp-purgecss');
@@ -54,12 +54,14 @@ gulp.task('scss', function () {
 
 // Optimize & Copy Images
 // Reference : https://www.npmjs.com/package/gulp-imagemin
-const imagemin = require('gulp-imagemin');
+
+// const imagemin = require('gulp-imagemin');
 gulp.task('copy-img', function () {
   return gulp.src('src/assets/img/**/*.*')
+  /*
     .pipe(imagemin({
       verbose: false
-    }))
+    })) */
     .pipe(gulp.dest('./public/assets/img/'));
 });
 

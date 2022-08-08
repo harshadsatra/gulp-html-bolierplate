@@ -58,10 +58,6 @@ gulp.task('scss', function () {
 // const imagemin = require('gulp-imagemin');
 gulp.task('copy-img', function () {
   return gulp.src('src/assets/img/**/*.*')
-  /*
-    .pipe(imagemin({
-      verbose: false
-    })) */
     .pipe(gulp.dest('./public/assets/img/'));
 });
 

@@ -1,5 +1,8 @@
 /* Plugins from Node Modules */
-// @import "slick-carousel/slick/slick.scss";
-// @import "slick-carousel/slick/slick-theme.scss";
+/* Change */
+$slick-loader-path: "../img/";
+$slick-font-path: "../font/";
+@import "slick-carousel/slick/slick.scss";
+@import "slick-carousel/slick/slick-theme.scss";
 // @import "aos/src/sass/aos.scss";
 // @import "bootstrap/scss/bootstrap.scss";

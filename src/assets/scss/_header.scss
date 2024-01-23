@@ -1,5 +1,92 @@
-/* general header css */
+$color_1: #fff;
+$color_2: #8739fa;
+$font-family_1: sans-serif;
+$background-color_1: #151418;
 
-.header{
-    background:red;
+.header {
+	position: sticky;
+	top: 0;
+	width: 100%;
+	box-shadow: 0 4px 20px hsla(207, 24%, 35%, 0.1);
+	background-color: $background-color_1;
+	z-index: 1;
+}
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 30px;
+}
+.logo {
+	a {
+		font-size: 24px;
+		font-weight: bold;
+		color: $color_1;
+		span {
+			color: $color_2;
+		}
+	}
+}
+.menu {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	a {
+		display: block;
+		padding: 7px 15px;
+		font-size: 17px;
+		font-weight: 500;
+		transition: 0.2s all ease-in-out;
+		color: $color_1;
+		&:hover {
+			opacity: 1;
+			color: $color_1;
+		}
+	}
+	&:hover {
+		a {
+			opacity: 0.4;
+		}
+	}
+}
+.menu-icon {
+	display: none;
+}
+#menu-toggle {
+	display: none;
+	&:checked {
+		~ {
+			.menu {
+				transform: scale(1, 1);
+			}
+		}
+	}
+}
+@media only screen and (max-width: 950px) {
+	.menu {
+		flex-direction: column;
+		background-color: $background-color_1;
+		align-items: start;
+		position: absolute;
+		top: 70px;
+		left: 0;
+		width: 100%;
+		z-index: 1;
+		transform: scale(1, 0);
+		transform-origin: top;
+		transition: transform 0.3s ease-in-out;
+		box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+		a {
+			margin-left: 12px;
+		}
+		li {
+			margin-bottom: 10px;
+		}
+	}
+	.menu-icon {
+		display: block;
+		color: $color_1;
+		font-size: 28px;
+		cursor: pointer;
+	}
 }

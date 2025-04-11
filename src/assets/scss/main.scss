@@ -15,12 +15,12 @@
 }
 */
 
-@import "reset";
-@import "vendor";
-@import "bootstrap-grid";
-@import "config";
-@import "header";
-@import "footer";
-@import "components";
-@import "pages";
-@import "responsive";
+@use "reset";
+@use "vendor";
+@use "bootstrap-grid";
+@use "config";
+@use "header";
+@use "footer";
+@use "components";
+@use "pages";
+@use "responsive";

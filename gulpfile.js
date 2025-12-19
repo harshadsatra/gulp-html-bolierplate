@@ -1,7 +1,6 @@
 const gulp = require("gulp")
 // var func = require('./compiler/helpers');
 const sass = require("gulp-sass")(require("sass"))
-const sourcemaps = require("gulp-sourcemaps")
 const purgecss = require("gulp-purgecss")
 const htmlmin = require("gulp-htmlmin")
 const concat = require("gulp-concat")
@@ -9,6 +8,8 @@ const minify = require("gulp-minify")
 const rename = require("gulp-rename")
 const strip = require("gulp-strip-comments")
 const uglify = require("gulp-uglify-es").default
+const replace = require("gulp-string-replace")
+const BUILD_VERSION = Date.now()
 
 // Node Modules JS to build.js Bundle
 // Reference : https://www.toptal.com/javascript/optimize-js-and-css-with-gulp
@@ -26,6 +27,13 @@ gulp.task("defer-js", function () {
 	return gulp.src(deferJS).pipe(concat("defer.js")).pipe(minify()).pipe(gulp.dest("public/assets/js"))
 })
 
+const replaceKeywords = {
+	'BUILD_VERSION': BUILD_VERSION,
+	'WEBSITE_LINK': 'WEBSITE_LINK',
+	'WEBSITE_NAME': 'Kiabsa Trading FZC',
+	'WEBSITE_EMAIL': 'kiabsafzc@gmail.com'
+}
+
 const htmlPartial = require("gulp-html-partial")
 gulp.task("html", function () {
 	return gulp
@@ -34,6 +42,12 @@ gulp.task("html", function () {
 		.pipe(
 			htmlPartial({
 				basePath: "src/partials/",
+			}),
+		)
+		// Loop through and replace all keywords dynamically
+		.pipe(
+			replace(new RegExp(Object.keys(replaceKeywords).join("|"), "g"), function (match) {
+				return replaceKeywords[match] || match
 			}),
 		)
 		.pipe(
@@ -49,14 +63,14 @@ gulp.task("html", function () {
 gulp.task("scss", function () {
 	return gulp
 		.src("src/assets/scss/**/*.scss")
-		.pipe(sourcemaps.init())
 		.pipe(
 			sass({
 				includePaths: ["node_modules"], // Ensure this is present
 				outputStyle: "compressed",
+				sourceMap: true,
+				sourceMapEmbed: true
 			}).on("error", sass.logError),
 		)
-		.pipe(sourcemaps.write("."))
 		.pipe(gulp.dest("public/assets/css/"))
 })
 
